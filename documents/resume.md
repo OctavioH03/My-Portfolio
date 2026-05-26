@@ -2,7 +2,7 @@
 id: resume
 section: resume
 title: Resume
-last_reviewed: 2026-04-27
+last_reviewed: 2026-05-25
 tags:
   - resume
   - skills
@@ -40,7 +40,7 @@ summary: Dense factual resume content for grounded answers about credentials and
 
 # Projects
 ## AiRise – AI-Powered Fitness App (Jan 2025 – Dec 2025)
-- Supported team coordination for 7-person Agile team, translating product requirements into 100+ Jira tasks and coordinating rapid feature delivery across backend and mobile layers
+- Supported team coordination for 8-person Agile team, translating product requirements into 100+ Jira tasks and coordinating rapid feature delivery across backend and mobile layers
 - Designed RESTful APIs in C#/.NET 9 with role-based Firebase Authentication, deployed on Azure with MongoDB aggregation pipelines for user profiles, health metrics, and social features
 - Integrated Google Gemini LLM API to deliver real-time fitness insights and adaptive summaries for end users
 - Developed the frontend data layer using Kotlin ViewModels and Ktor HTTP client to communicate with backend APIs, delivering smooth and responsive UI features across the Android app
