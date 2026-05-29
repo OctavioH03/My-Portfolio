@@ -3,7 +3,7 @@ id: airise
 section: project
 title: AiRise
 last_reviewed: 2026-05-01
-status: shipped  # shipped | in-progress | archived | learning
+status: shipped
 date_start: 2025-01
 date_end: 2025-12
 stack:
@@ -29,6 +29,9 @@ skills:
   - Supabase BLOB storage
 tags:
   - project
+  - AI
+  - Backend
+  - Full-stack
 links:
   repo: https://github.com/OctavioH03/AiRise
 summary: Cross-platform AI fitness app where I owned the C#/.NET API layer, Gemini-powered personalization, and KMP health-data integration on an 8-person Agile team.

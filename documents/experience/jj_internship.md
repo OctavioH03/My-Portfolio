@@ -1,5 +1,5 @@
 ---
-id: jj_internship 
+id: jj_internship
 section: experience
 title: Software Engineer Intern
 last_reviewed: 2026-05-01
