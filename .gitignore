@@ -1,4 +1,10 @@
+# General
 TODOs
 templates
 extra_notes_and_docs
+**/.env
+
+# Backend
 **/venv
+**/.pytest_cache
+**/__pycache__
