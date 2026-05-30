@@ -1,4 +1,5 @@
 from datetime import date
+from app.models.flexible_date_model import FlexibleDateModel
 
 def general_frontmatter_factory(**overrides: dict) -> dict:
     base_content = {
@@ -21,8 +22,8 @@ def experience_frontmatter_factory(**overrides: dict) -> dict:
         "organization": "Johnson & Johnson",
         "location": "New Brunswick, NJ",
         "employment_type": "Intern",
-        "date_start": date(2025, 5, 1),
-        "date_end": date(2025, 8, 1),
+        "date_start": FlexibleDateModel(year=2025, month=5, precision="month"),
+        "date_end": FlexibleDateModel(year=2025, month=8, precision="month"),
         "stack": ["Python", "SQL", "Oracle", "Multithreading"],
         "skills": ["Problem Solving", "Communication", "Teamwork", "Leadership"],
         "tags": ["experience"],
@@ -38,8 +39,8 @@ def project_frontmatter_factory(**overrides: dict) -> dict:
         "title": "AiRise",
         "last_reviewed": date(2026, 5, 25),
         "status": "Completed",
-        "date_start": date(2025, 1, 1),
-        "date_end": date(2025, 12, 1),
+        "date_start": FlexibleDateModel(year=2025, month=1, precision="month"),
+        "date_end": FlexibleDateModel(year=2025, month=12, precision="month"),
         "stack": ["Python", "React", "TypeScript", "PostgreSQL"],
         "skills": ["Problem Solving", "Communication", "Teamwork", "Leadership"],
         "links": {"github": "https://github.com/airise", "website": "https://airise.com"},

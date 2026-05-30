@@ -1,5 +1,6 @@
 from datetime import date
 from app.utils.validation import validate_daterange
+from app.models.flexible_date_model import FlexibleDate
 from pydantic import BaseModel, Field, model_validator
 from typing import Literal, Optional, Union
 
@@ -17,8 +18,8 @@ class ExperienceFrontmatterModel(BaseFrontmatterModel):
     organization: str
     location: str
     employment_type: str
-    date_start: date
-    date_end: date
+    date_start: FlexibleDate
+    date_end: FlexibleDate
     stack: list[str] = Field(default_factory=list)
     skills: list[str] = Field(default_factory=list)
 
@@ -30,8 +31,8 @@ class ExperienceFrontmatterModel(BaseFrontmatterModel):
 class ProjectFrontmatterModel(BaseFrontmatterModel):
     section: Literal["project"]
     status: str
-    date_start: date
-    date_end: date
+    date_start: FlexibleDate
+    date_end: FlexibleDate
     stack: list[str] = Field(default_factory=list)
     skills: list[str] = Field(default_factory=list)
     links: dict[str, str] = Field(default_factory=dict)

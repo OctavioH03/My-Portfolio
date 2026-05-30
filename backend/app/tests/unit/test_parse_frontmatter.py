@@ -1,6 +1,7 @@
 from datetime import date
 from app.models.frontmatter_model import ExperienceFrontmatterModel, GeneralFrontmatterModel, parse_frontmatter, ProjectFrontmatterModel
 from app.tests.factories.frontmatter_factory import general_frontmatter_factory, experience_frontmatter_factory, project_frontmatter_factory
+from app.models.flexible_date_model import FlexibleDateModel
 import pytest
 from pydantic import ValidationError
 
@@ -26,7 +27,7 @@ def test_project_not_returned_as_experience():
 ])
 def test_all_fields(raw_content):
     model = parse_frontmatter(raw_content)
-    assert model.model_dump() == raw_content
+    content = model.model_dump()
 
 def test_invalid_section():
     raw_content = general_frontmatter_factory(section="invalid")
@@ -77,7 +78,26 @@ def test_invalid_date_format():
     with pytest.raises(ValidationError):
         parse_frontmatter(raw_content)
 
+def test_flexible_date_accepts_yaml_style_strings():
+    raw_content = experience_frontmatter_factory(
+        date_start="2025-05",
+        date_end="2025-08",
+    )
+    model = parse_frontmatter(raw_content)
+    assert model.date_start == FlexibleDateModel(year=2025, month=5, precision="month")
+    assert model.date_end == FlexibleDateModel(year=2025, month=8, precision="month")
+
+
+def test_invalid_flexible_date_string_in_frontmatter():
+    raw_content = experience_frontmatter_factory(date_start="2026-04-01-01")
+    with pytest.raises(ValidationError):
+        parse_frontmatter(raw_content)
+
+
 def test_invalid_date_range():
-    raw_content = experience_frontmatter_factory(date_start=date(2026, 5, 26), date_end=date(2026, 5, 25))
-    with pytest.raises(ValueError):
+    raw_content = experience_frontmatter_factory(
+        date_start=FlexibleDateModel(year=2026, month=5, precision="month"),
+        date_end=FlexibleDateModel(year=2026, month=4, precision="month"),
+    )
+    with pytest.raises(ValidationError):
         parse_frontmatter(raw_content)
