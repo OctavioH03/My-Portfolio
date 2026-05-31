@@ -15,7 +15,7 @@ summary: Preferred ways to reach you for recruiting or collaboration.
 
 ## Preferred channel
 
-The preferred way to reach me is through email or LinkedIn.
+Octavio's preferred form of contact is through email or LinkedIn.
 
 ## Links
 

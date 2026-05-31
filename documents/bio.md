@@ -10,7 +10,7 @@ related:
   - contact
 summary: New grad SWE with a 3.92 GPA, Python and C#/.NET backend experience, and hands-on LLM integration work. Looking for backend and AI-focused roles.
 ---
-# About me
+# About me (MAKE THIS 3RD PERSON)
 I graduated from CSU Sacramento in December 2025, Summa Cum Laude with a 3.92 GPA.
 
 Before going to college in Sacramento I was planning on attending San Jose State to be closer to Silicon Valley, but that would have meant taking on tens of thousands of dollars in debt. Instead, I worked a full time warehouse job to save money while making the decision to attend my local CSU rather than one with a more expensive tuition. This decision has shaped me by teaching me how to approach tradeoffs, specifically on short vs long term gain.

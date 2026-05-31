@@ -30,19 +30,23 @@ Octavio's strongest area is backend systems and data pipelines in Python. His mo
 
 Multiple examples below, each with a category tag and a pointer to the full story.
 
-**J&J pipeline — threading bottleneck** `Technical` `Performance` `Problem Solving` (see `jj_internship.md`)
+### J&J pipeline — threading bottleneck
+`Technical` `Performance` `Problem Solving` (see `jj_internship.md`)
 
 The single-threaded pipeline was timing out on large log files, blocking smaller files from completing. Octavio fixed this by parallelizing the parsing, embedding, and clustering stages across files using multithreading. The full daily run completed in approximately one hour consistently after the fix.
 
-**AiRise — Google Sign-In rescue** `Technical` `Leadership` `Teamwork` (see `airise.md`)
+### AiRise — Google Sign-In rescue
+`Technical` `Leadership` `Teamwork` (see `airise.md`)
 
 A teammate was unable to finish OAuth across two sprints and only surfaced the blocker the weekend the sprint was closing. Octavio stepped in, built the iOS-side implementation using the Kotlin expect/actual pattern, fixed the key management setup, and resolved the OAuth API integration. Both platforms were working by end of sprint. He followed up privately with the teammate to address the root cause of the repeated blocking.
 
-**OS kernel — scheduler timing bug** `Technical` `Systems` `Debugging` (see `os_project.md`)
+### OS kernel — scheduler timing bug
+`Technical` `Systems` `Debugging` (see `os_project.md`)
 
 Two variables tracking process CPU time had incorrect reset behavior — the lifetime counter was resetting when it should have been accumulating, and the per-slice counter was not resetting after expiry. Combined effect: all processes lost the CPU after their first timeslice and never recovered, leaving the idle process running indefinitely. Caught and fixed before submission.
 
-**AiRise — Gemini token efficiency** `Technical` `Optimization` `API Integration` (see `airise.md`)
+### AiRise — Gemini token efficiency
+`Technical` `Optimization` `API Integration` (see `airise.md`)
 
 During development, the regeneration-on-every-visit behavior quickly exhausted free-tier token limits, signaling it would be costly at scale. Octavio scoped generation to once on app launch and once per hour if the app remained open, reducing API usage without degrading the user experience.
 
