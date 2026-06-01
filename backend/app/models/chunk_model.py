@@ -24,3 +24,6 @@ class ChunkModel(BaseModel):
     header_path: list[str]
     document_id: str    # foreign key to the document
     metadata: ChunkMetaData
+
+class EmbeddingChunkModel(ChunkModel):
+    embedding: list[float]
