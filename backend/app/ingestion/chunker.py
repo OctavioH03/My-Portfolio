@@ -1,8 +1,10 @@
 import app.core.logging as logging
-from app.models.frontmatter_model import FrontmatterModel
+from app.models.document_model import DocumentModel
+from app.models.chunk_model import ChunkModel
 from app.builders.chunk_factory import create_chunks
 from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 from langchain_core.documents import Document as LangchainDocument
+
 
 logger = logging.get_logger(__name__)
 
@@ -17,13 +19,25 @@ CHARACTERS_TO_SPLIT_ON = ["\n\n", "\n", ". ", ".", " ", ""]
 ENCODING_NAME = "cl100k_base"
 
 
-def chunk_document(document: tuple[FrontmatterModel, str]) -> list[str]:
-    frontmatter, markdown_content = document
-    split_content = split_markdown_content(markdown_content)
-    chunks = create_chunks(split_content, frontmatter)
+def chunk_document(document: DocumentModel) -> list[ChunkModel]:
+    """Chunk a document
+    Args:
+        document(DocumentModel): The document to chunk
+    Returns:
+        list[ChunkModel]: The chunks
+    """
+    split_content = split_markdown_content(document.content)
+    chunks = create_chunks(split_content, document)
     return chunks
 
 def split_markdown_content(markdown_content: str) -> list[LangchainDocument]:
+    """Split the markdown content into chunks using the MarkdownHeaderTextSplitter and RecursiveCharacterTextSplitter from LangChain
+
+    Args:
+        markdown_content(str): The markdown content to split
+    Returns:
+        list[LangchainDocument]: The split content
+    """
     markdown_header_splitter = MarkdownHeaderTextSplitter(
         headers_to_split_on=HEADERS_TO_SPLIT_ON,
         strip_headers=False
@@ -40,6 +54,19 @@ def split_markdown_content(markdown_content: str) -> list[LangchainDocument]:
     split_content = recursive_character_splitter.split_documents(md_header_split_content)
 
     return split_content
+
+def chunk_documents(documents: list[DocumentModel]) -> list[ChunkModel]:
+    """Chunk a list of documents
+
+    Args:
+        documents(list[DocumentModel]): The documents to chunk
+    Returns:
+        list[ChunkModel]: The chunks
+    """
+    chunks = []
+    for document in documents:
+        chunks.extend(chunk_document(document))
+    return chunks
 
 # Simple test to check if the chunker is working
 # TODO: Remove this test before deploying

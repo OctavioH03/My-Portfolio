@@ -1,5 +1,4 @@
 ---
-id: airise
 section: project
 title: AiRise
 last_reviewed: 2026-05-01

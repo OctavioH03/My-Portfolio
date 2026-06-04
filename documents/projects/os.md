@@ -1,5 +1,4 @@
 ---
-id: os_project
 section: project
 title: SPEDE Operating System
 last_reviewed: 2026-05-25

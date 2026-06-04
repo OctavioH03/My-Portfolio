@@ -1,5 +1,4 @@
 ---
-id: faq
 section: faq
 title: Frequently Asked Questions
 last_reviewed: 2026-05-25

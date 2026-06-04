@@ -1,5 +1,4 @@
 ---
-id: goals
 section: goals
 title: Career goals
 last_reviewed: YYYY-MM-DD

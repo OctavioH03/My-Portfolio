@@ -1,5 +1,4 @@
 ---
-id: github_insights_tool
 section: project
 title: GitHub Repository Insights Tool
 last_reviewed: 2026-05-25

@@ -1,5 +1,4 @@
 ---
-id: contact
 section: contact
 title: Contact
 last_reviewed: 2026-04-27

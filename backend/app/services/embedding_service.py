@@ -56,15 +56,20 @@ class EmbeddingService:
         Returns:
             list[EmbeddingChunkModel]: The list of embedded chunks
         """
-        embedded_chunks = []
-        for chunk in chunks:
-            input = build_embedding_input(chunk)
-            embedding = self.embed_text(input)
-            embedded_chunks.append(EmbeddingChunkModel(
+        inputs = [build_embedding_input(chunk) for chunk in chunks]
+        response = self.openai.embeddings.create(
+            input=inputs,
+            model=self.model,
+            encoding_format="float"
+        )
+        
+        embeddings = []
+        for chunk, data in zip(chunks, response.data):
+            embeddings.append(EmbeddingChunkModel(
                 **chunk.model_dump(),
-                embedding=embedding
+                embedding=data.embedding
             ))
-        return embedded_chunks
+        return embeddings
 
 # Test the embedding service
 if __name__ == "__main__":

@@ -1,5 +1,4 @@
 ---
-id: csu_ta
 section: experience
 title: Teaching Assistant — Algorithms & Paradigms
 last_reviewed: 2026-05-25

@@ -1,7 +1,9 @@
 from app.models.chunk_model import ChunkModel
-from app.models.frontmatter_model import FrontmatterModel
+from app.models.document_model import DocumentModel
 from app.builders.build_metadata import build_metadata
 from langchain_core.documents import Document as LangchainDocument
+
+
 
 def _build_header_path(metadata: dict) -> list[str]:
     """Build the header path from the metadata given by LangChain's MarkdownHeaderTextSplitter
@@ -13,45 +15,41 @@ def _build_header_path(metadata: dict) -> list[str]:
     header_path = [value for key, value in sorted(metadata.items())]
     return header_path
 
-def create_chunk(chunk_index: int, content: str, header_path: list[str], frontmatter: FrontmatterModel) -> ChunkModel:
+def create_chunk(chunk_index: int, content: str, header_path: list[str], document: DocumentModel) -> ChunkModel:
     """Create a chunk model
     Args:
         chunk_index(int): The index of the chunk
         content(str): The content of the chunk
         header_path(list[str]): The header path of the chunk
-        frontmatter(FrontmatterModel): The frontmatter model to create the chunk for
+        document(DocumentModel): The document to create the chunk for
     Returns:
         ChunkModel: The chunk model
     """
-    metadata = build_metadata(frontmatter)
+    metadata = build_metadata(document)
     return ChunkModel(
-        id=f"{frontmatter.id}-{header_path[-1].lower()}-{chunk_index:04d}",
         content=content,
         header_path=header_path,
-        document_id=frontmatter.id,
+        document_id=document.id,
+        chunk_index=chunk_index,
         metadata=metadata
     )
 
-def create_chunks(split_content: list[LangchainDocument], frontmatter: FrontmatterModel) -> list[ChunkModel]:
+def create_chunks(split_content: list[LangchainDocument], document: DocumentModel) -> list[ChunkModel]:
     """Create a list of chunk models
+    
     Args:
-        split_content(list[tuple[list[str], str]]): The split content with each index containing the header path and the content for the chunk
-        frontmatter(FrontmatterModel): The frontmatter model to create the chunks for
+        split_content(list[LangchainDocument]): The split content to create the chunks for
+        document(DocumentModel): The document to create the chunks for
     Returns:
         list[ChunkModel]: The list of chunk models
-    Notes:
-        - The chunk index is used to create a unique id for the chunk
-        - The last header in the header path is used to create a unique id for the chunk
-        - The document id is used to create a unique id for the chunk
-        - The metadata is used to create the chunk model
     """
     chunks = []
-    for chunk_index, document in enumerate(split_content):
-        header_path = _build_header_path(document.metadata)
+    for chunk_index, chunk_data in enumerate(split_content):
+        header_path = _build_header_path(chunk_data.metadata)
         chunks.append(create_chunk(
             chunk_index=chunk_index,
-            content=document.page_content,
+            content=chunk_data.page_content,
             header_path=header_path,
-            frontmatter=frontmatter
+            document=document
         ))
     return chunks

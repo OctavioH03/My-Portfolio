@@ -1,5 +1,4 @@
 ---
-id: bio
 section: bio
 title: About me
 last_reviewed: 2026-05-25
