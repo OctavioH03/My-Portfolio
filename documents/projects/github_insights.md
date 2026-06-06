@@ -26,6 +26,7 @@ tags:
 links:
   repo: https://github.com/OctavioH03/github-repo-insights
 summary: Built a full-stack agentic tool that uses a two-stage LLM pipeline to let users analyze any GitHub repository or find one using natural language — receiving AI-generated insight cards covering what it does, its tech stack, risks, and quick start steps.
+source_path: projects/github_insights.md
 ---
 
 # GitHub Repository Insights Tool

@@ -34,6 +34,7 @@ tags:
 links:
   repo: https://github.com/OctavioH03/AiRise
 summary: Cross-platform AI fitness app where I owned the C#/.NET API layer, Gemini-powered personalization, and KMP health-data integration on an 8-person Agile team.
+source_path: projects/airise.md
 ---
 
 # AiRise

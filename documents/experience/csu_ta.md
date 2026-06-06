@@ -15,6 +15,7 @@ skills:
 tags:
   - experience
 summary: Recruited directly by the professor to TA Algorithms & Paradigms at CSUS — a combined undergraduate and graduate course — after excelling as a student in the same course. Graded 5 assignments across 44 students, held weekly virtual office hours, and flagged recurring student mistakes to the professor to inform lecture focus.
+source_path: experience/csu_ta.md
 ---
 
 # Teaching Assistant — Algorithms & Paradigms

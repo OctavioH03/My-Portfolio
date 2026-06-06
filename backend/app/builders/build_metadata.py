@@ -54,7 +54,8 @@ def build_metadata(document: DocumentModel) -> ChunkMetaData:
     base = {
         "section": document.section,
         "title": document.title,
-        "last_reviewed": document.last_reviewed
+        "last_reviewed": document.last_reviewed,
+        "source_path": document.source_path
     }
     builder = BUILDERS.get(document.section)
     # All sections without a builder will use the base metadata

@@ -8,7 +8,7 @@ class ChunkMetaData(BaseModel):
     section: str
     title: str
     last_reviewed: date
-
+    source_path: str
     # Experience specific fields
     organization: Optional[str] = None
     employment_type: Optional[str] = None

@@ -8,6 +8,7 @@ related:
   - bio
   - faq
 summary: Preferred ways to reach you for recruiting or collaboration.
+source_path: contact.md
 ---
 
 # Contact

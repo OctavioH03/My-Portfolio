@@ -11,6 +11,7 @@ class BaseFrontmatterModel(BaseModel):
     tags: list[str] = Field(default_factory=list)
     related: list[str] = Field(default_factory=list)
     summary: Optional[str] = None
+    source_path: str
 
 class ExperienceFrontmatterModel(BaseFrontmatterModel):
     section: Literal["experience"]

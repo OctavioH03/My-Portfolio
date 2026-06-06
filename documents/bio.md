@@ -8,6 +8,7 @@ related:
   - goals
   - contact
 summary: New grad SWE with a 3.92 GPA, Python and C#/.NET backend experience, and hands-on LLM integration work. Looking for backend and AI-focused roles.
+source_path: bio.md
 ---
 # About me (MAKE THIS 3RD PERSON)
 I graduated from CSU Sacramento in December 2025, Summa Cum Laude with a 3.92 GPA.

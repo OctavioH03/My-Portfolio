@@ -14,6 +14,7 @@ related:
   - better_sense
   - contact
 summary: Dense factual resume content for grounded answers about credentials and skills.
+source_path: resume.md
 ---
 # Education
 - California State University, Sacramento	

@@ -24,6 +24,7 @@ skills:
 tags:
   - experience
 summary: Built an end-to-end Python automation pipeline for J&J's ERP Application Maintenance and Automation team that parsed, embedded, and clustered 400+ OMP log files daily — reducing log noise by 99% and increasing throughput 4x via multithreading.
+source_path: experience/jj_internship.md
 ---
 
 # J&J Software Engineer Intern

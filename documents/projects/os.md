@@ -34,6 +34,7 @@ tags:
 links:
   repo: https://github.com/OctavioH03/spede-os
 summary: Built a functional x86 OS kernel from scratch in C and assembly as team lead on a 3-person team in a combined undergrad/grad OS course at CSUS, implementing hardware drivers, interrupt handling, process scheduling, system calls, and mutex-based concurrency.
+source_path: projects/os.md
 ---
 
 # SPEDE Operating System

@@ -5,6 +5,7 @@ last_reviewed: 2026-05-25
 tags:
   - faq
 summary: Short factual answers to common recruiter questions about Octavio's background, preferences, and goals.
+source_path: faq.md
 ---
 
 # Frequently Asked Questions

@@ -5,6 +5,7 @@ last_reviewed: YYYY-MM-DD
 tags:
   - goals
 summary: What roles, problems, or environments you want next.
+source_path: goals.md
 ---
 
 # Career goals
