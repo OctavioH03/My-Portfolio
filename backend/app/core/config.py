@@ -9,15 +9,15 @@ class Settings(BaseSettings):
         extra="ignore"
     )
 
-    openai_api_key: str
-    supabase_url: str
-    supabase_service_role_key: str
+    OPENAI_API_KEY: str
+    SUPABASE_URL: str
+    SUPABASE_SERVICE_ROLE_KEY: str
 
     # Optional settings
-    log_level: int = INFO
-    chat_model: str = "gpt-4o"
-    embedding_model: str = "text-embedding-3-small"
-    documents_path: str = "documents"
+    LOG_LEVEL: int = INFO
+    CHAT_MODEL: str = "gpt-4o"
+    EMBEDDING_MODEL: str = "text-embedding-3-small"
+    DOCUMENTS_PATH: str = "documents"
 
 @lru_cache(maxsize=1)
 def get_config() -> Settings:
