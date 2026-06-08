@@ -1,9 +1,11 @@
 from datetime import date
 from typing import Optional
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, field_validator
 from uuid import UUID
+import json
 
 class ChunkMetaData(BaseModel):
+    model_config = ConfigDict(extra="ignore")
     # Common fields
     section: str
     title: str
@@ -20,12 +22,25 @@ class ChunkMetaData(BaseModel):
     skills: Optional[list[str]] = None
 
 class ChunkModel(BaseModel):
-    id: Optional[UUID] = None # None for new chunks, UUID for existing chunks
+    id: str
     content: str
     header_path: list[str]
-    document_id: Optional[UUID] = None # None for new documents, UUID for existing documents
+    document_id: str
     chunk_index: int
-    metadata: ChunkMetaData
+    metadata: Optional[ChunkMetaData] = None
+    @field_validator("header_path", mode="before")
+    @classmethod
+    def parse_header_path(cls, value: str) -> list[str]:
+        if isinstance(value, str):
+            return json.loads(value)
+        return value
 
 class EmbeddingChunkModel(ChunkModel):
     embedding: list[float]
+
+    @field_validator("embedding", mode="before")
+    @classmethod
+    def parse_embedding(cls, value: str) -> list[float]:
+        if isinstance(value, str):
+            return json.loads(value)
+        return value

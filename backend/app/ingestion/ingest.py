@@ -1,6 +1,6 @@
 from app.ingestion.document_loader import load_documents_from_directory
 from app.ingestion.chunker import chunk_documents
-from app.services.embedding_service import EmbeddingService
+from app.services.ingestion_service import IngestionService
 from pathlib import Path
 
 
@@ -9,14 +9,11 @@ def run_ingestion() -> None:
     documents = load_documents_from_directory(Path("../documents"), exclude=["README.md", "goals.md"]) # temporary exclusion for goals.md until it is completed
     
     # Chunk the documents
-    chunks = chunk_documents(documents)
+    documents_to_chunks = chunk_documents(documents)
 
-    # Embed the chunks
-    embedding_service = EmbeddingService()
-    embedded_chunks = embedding_service.embed_chunks(chunks)
-
-    # Store the chunks in the database
-    #upsert_chunks(embedded_chunks)
+    # Ingest the documents and chunks: upserts the documents and chunks into the database
+    ingestion_service = IngestionService()
+    ingested_documents_and_chunks = ingestion_service.ingest_chunked_documents(documents_to_chunks)
 
 if __name__ == "__main__":
     run_ingestion()

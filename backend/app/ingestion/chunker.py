@@ -5,7 +5,6 @@ from app.builders.chunk_factory import create_chunks
 from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 from langchain_core.documents import Document as LangchainDocument
 
-
 logger = logging.get_logger(__name__)
 
 HEADERS_TO_SPLIT_ON = [
@@ -55,30 +54,15 @@ def split_markdown_content(markdown_content: str) -> list[LangchainDocument]:
 
     return split_content
 
-def chunk_documents(documents: list[DocumentModel]) -> list[ChunkModel]:
+def chunk_documents(documents: list[DocumentModel]) -> list[tuple[DocumentModel, list[ChunkModel]]]:
     """Chunk a list of documents
 
     Args:
         documents(list[DocumentModel]): The documents to chunk
     Returns:
-        list[ChunkModel]: The chunks
+        list[tuple[DocumentModel, list[ChunkModel]]]: The chunks
     """
-    chunks = []
+    chunks: list[tuple[DocumentModel, list[ChunkModel]]] = []
     for document in documents:
-        chunks.extend(chunk_document(document))
+        chunks.append((document, chunk_document(document)))
     return chunks
-
-# Simple test to check if the chunker is working
-# TODO: Remove this test before deploying
-if __name__ == "__main__":
-    from app.ingestion.document_loader import load_documents
-    from pathlib import Path
-
-    document = load_documents(Path("../documents/projects/airise.md"))
-    chunks = chunk_document(document)
-    for chunk in chunks:
-        print(f"ID: {chunk.id}")
-        print(f"Content: {chunk.content[:100]}...")
-        print(f"Header Path: {chunk.header_path}")
-        print("-"*100)
-    print(f"FULL LAST CHUNK:\n{chunks[-1]}")

@@ -15,6 +15,17 @@ def _build_header_path(metadata: dict) -> list[str]:
     header_path = [value for key, value in sorted(metadata.items())]
     return header_path
 
+def _build_chunk_id(header_path: list[str], chunk_index: int, document_id: str) -> str:
+    """Build a chunk ID from the header path
+    Args:
+        header_path(list[str]): The header path of the chunk
+        chunk_index(int): The index of the chunk
+        document_id(str): The ID of the document
+    Returns:
+        str: The chunk ID
+    """
+    return f"{document_id}-{'-'.join(header_path)}-{chunk_index:04d}" # example: projects-airise-challenges-0023
+
 def create_chunk(chunk_index: int, content: str, header_path: list[str], document: DocumentModel) -> ChunkModel:
     """Create a chunk model
     Args:
@@ -27,6 +38,7 @@ def create_chunk(chunk_index: int, content: str, header_path: list[str], documen
     """
     metadata = build_metadata(document)
     return ChunkModel(
+        id=_build_chunk_id(header_path, chunk_index, document.id),
         content=content,
         header_path=header_path,
         document_id=document.id,
