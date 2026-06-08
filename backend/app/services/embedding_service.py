@@ -30,8 +30,8 @@ class EmbeddingService:
     def __init__(self):
         """Initialize the embedding service
         """
-        self.openai = OpenAI(api_key=Settings().openai_api_key)
-        self.model = Settings().embedding_model
+        self.openai = OpenAI(api_key=Settings().OPENAI_API_KEY)
+        self.model = Settings().EMBEDDING_MODEL
 
     def embed_text(self, text: str) -> list[float]:
         """Embed a string of text
