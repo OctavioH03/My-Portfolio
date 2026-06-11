@@ -1,4 +1,4 @@
-from app.models.chunk_model import ChunkModel
+from app.models.chunk_models import ChunkModel
 
 def build_embedding_input(chunk: ChunkModel) -> str:
     """Build the embedding input for a chunk

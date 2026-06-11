@@ -1,7 +1,7 @@
 from openai import OpenAI
 from app.core.config import Settings
 from app.core.logging import get_logger
-from app.models.chunk_model import ChunkModel, EmbeddingChunkModel
+from app.models.chunk_models import ChunkModel, EmbeddingChunkModel
 from app.builders.build_embedding_input import build_embedding_input
 
 logger = get_logger(__name__)

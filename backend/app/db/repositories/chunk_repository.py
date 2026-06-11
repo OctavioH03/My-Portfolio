@@ -1,7 +1,6 @@
 from app.db.supabase_client import get_supabase_client
-from app.models.chunk_model import EmbeddingChunkModel
+from app.models.chunk_models import EmbeddingChunkModel
 from app.core.logging import get_logger
-from uuid import UUID
 
 class ChunkRepository:
 
@@ -27,11 +26,11 @@ class ChunkRepository:
             self._logger.error(f"Error upserting chunks: {e}")
             raise
 
-    def get_chunks_by_document_id(self, document_id: UUID) -> list[EmbeddingChunkModel]:
+    def get_chunks_by_document_id(self, document_id: str) -> list[EmbeddingChunkModel]:
         """Get all chunks for a document
 
         Args:
-            document_id(UUID): The document ID
+            document_id(str): The document ID
         Returns:
             list[EmbeddingChunkModel]: The chunks
         """
@@ -45,11 +44,11 @@ class ChunkRepository:
             self._logger.error(f"Error getting chunks by document ID: {e}")
             raise
 
-    def get_chunk_by_id(self, id: UUID) -> EmbeddingChunkModel:
+    def get_chunk_by_id(self, id: str) -> EmbeddingChunkModel:
         """Get a chunk by its ID
 
         Args:
-            id(UUID): The ID of the chunk
+            id(str): The ID of the chunk
         Returns:
             EmbeddingChunkModel: The chunk
         """
@@ -63,11 +62,11 @@ class ChunkRepository:
             self._logger.error(f"Error getting chunk by ID: {e}")
             raise
 
-    def delete_chunk_by_id(self, id: UUID) -> None:
+    def delete_chunk_by_id(self, id: str) -> None:
         """Delete a chunk by its ID
 
         Args:
-            id(UUID): The ID of the chunk
+            id(str): The ID of the chunk
         Returns:
             None
         """
@@ -78,11 +77,11 @@ class ChunkRepository:
             self._logger.error(f"Error deleting chunk by ID: {e}")
             raise
     
-    def delete_chunks_by_document_id(self, document_id: UUID) -> None:
+    def delete_chunks_by_document_id(self, document_id: str) -> None:
         """Delete all chunks for a document
 
         Args:
-            document_id(UUID): The document ID
+            document_id(str): The document ID
         Returns:
             None
         """

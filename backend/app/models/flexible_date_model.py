@@ -1,5 +1,4 @@
 from typing import Annotated, Any, Literal, Optional
-
 from pydantic import BaseModel, BeforeValidator
 
 

@@ -1,6 +1,6 @@
 import app.core.logging as logging
-from app.models.document_model import DocumentModel
-from app.models.chunk_model import ChunkModel
+from app.models.document_models import DocumentModel
+from app.models.chunk_models import ChunkModel
 from app.builders.chunk_factory import create_chunks
 from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 from langchain_core.documents import Document as LangchainDocument

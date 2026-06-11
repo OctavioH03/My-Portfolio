@@ -2,8 +2,8 @@ from app.db.repositories.document_repository import DocumentRepository
 from app.db.repositories.chunk_repository import ChunkRepository
 from app.services.embedding_service import EmbeddingService
 from app.core.logging import get_logger
-from app.models.document_model import DocumentModel
-from app.models.chunk_model import ChunkMetaData, ChunkModel, EmbeddingChunkModel
+from app.models.document_models import DocumentModel
+from app.models.chunk_models import ChunkMetaData, ChunkModel, EmbeddingChunkModel
 
 class IngestionService:
 

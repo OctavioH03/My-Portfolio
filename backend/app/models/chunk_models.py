@@ -1,7 +1,6 @@
 from datetime import date
 from typing import Optional
 from pydantic import BaseModel, ConfigDict, field_validator
-from uuid import UUID
 import json
 
 class ChunkMetaData(BaseModel):

@@ -1,5 +1,5 @@
-from app.models.chunk_model import ChunkModel
-from app.models.document_model import DocumentModel
+from app.models.chunk_models import ChunkModel
+from app.models.document_models import DocumentModel
 from app.builders.build_metadata import build_metadata
 from langchain_core.documents import Document as LangchainDocument
 

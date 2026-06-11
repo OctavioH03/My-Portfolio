@@ -1,6 +1,5 @@
-from app.models.document_model import DocumentModel
 from app.models.frontmatter_model import FrontmatterModel, ExperienceFrontmatterModel, ProjectFrontmatterModel, GeneralFrontmatterModel
-from app.models.document_model import ExperienceDocumentModel, ProjectDocumentModel, GeneralDocumentModel, DocumentModel
+from app.models.document_models import ExperienceDocumentModel, ProjectDocumentModel, GeneralDocumentModel, DocumentModel
 import re
 
 SECTION_TO_MODEL: dict[str, tuple[type[FrontmatterModel], type[DocumentModel]]] = {
