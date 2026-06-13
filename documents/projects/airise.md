@@ -1,7 +1,7 @@
 ---
 section: project
 title: AiRise
-last_reviewed: 2026-05-01
+last_reviewed: 2026-06-11
 status: shipped
 date_start: 2025-01
 date_end: 2025-12
@@ -49,14 +49,20 @@ Personal trainers and coaching programs are expensive and inaccessible for most 
 
 ## What Octavio built
 
-- Implemented the admin authorization system using a custom ASP.NET Core authorization handler with a fresh-token plus boolean admin-field approach, balancing security with a low-friction experience for the client. Validated the approach with the client before building.
-- Built fitness challenge management endpoints, enabling clients to create, modify, and delete challenges through protected admin routes.
+### Frontend
 - Built the welcome, signup, and login screens using Compose Multiplatform in the shared commonMain module across Android and iOS, implementing screen state and navigation logic via Kotlin ViewModels and API communication via Ktor HTTP client.
 - Set up BuildKonfig for the entire project to allow secure storage and retrieval of API keys via the local.properties file, making key management consistent and safe across the team.
-- Stepped in to complete Google Sign-In after a teammate was unable to finish. The Android side had solid groundwork; Octavio built the iOS-side implementation using the Kotlin expect/actual pattern and fixed the key integration and OAuth API communication that was blocking both platforms.
-- Integrated Gemini into the frontend through a KMP-compatible wrapper around Google's generative AI SDK. Fed live database context to the LLM to generate fresh fitness summaries through the AiRise Coach. Resolved a token efficiency issue where summaries were regenerating on every screen visit — fixed by running once on launch and refreshing on a one-hour interval.
+- Integrated Gemini into the frontend through a KMP-compatible wrapper around Google's generative AI SDK. Gathered live database context via Ktor API calls and fed it into the SDK to generate personalized fitness summaries through the AiRise Coach. Resolved a token efficiency issue where summaries were regenerating on every screen visit — fixed by running once on launch and refreshing on a one-hour interval.
+- Stepped in to complete Google Sign-In after a teammate was unable to finish. Built the iOS-side implementation using the Kotlin expect/actual pattern and resolved the key integration and OAuth API communication issues that were blocking both platforms.
+- Integrated every backend endpoint he owned into the frontend, making the corresponding Ktor HTTP calls and wiring responses into ViewModels to keep each feature's vertical slice self-contained. This avoided handing off unfamiliar API contracts to frontend-only teammates and ensured consistent error handling and state management across his features.
+
+### Backend
+- Implemented the admin authorization system using a custom ASP.NET Core authorization handler with a fresh-token plus boolean admin-field approach, balancing security with a low-friction experience for the client. Validated the approach with the client before building.
+- Built fitness challenge management endpoints, enabling clients to create, modify, and delete challenges through protected admin routes.
+- Built RESTful endpoints for collecting and retrieving user health data, supporting both directions of sync — ingesting updates from wearables and health platform integrations, and serving that data back for display across app features and as live context for the Gemini AI Coach.
+- Built the social follow system endpoints, enabling users to follow and unfollow others. Designed as a unidirectional follow model with no pending/request stage, keeping the implementation straightforward while supporting the leaderboard and community features built on top of it.
+- Built the workout personalization endpoints that generated custom rep, set, and duration targets based on each user's fitness goals. Implemented goal-type mapping and calculations to differentiate programming — higher volume for weight loss and maintenance goals, lower rep ranges with heavier loading for muscle gain — while also accounting for exercise modality differences between traditional set/rep work and timed movements.
 - Wrote unit and integration tests for every backend feature Octavio personally built, including user health data collection, workout program personalization, and social features, plus partial coverage where contributions overlapped with teammates. Tested the service layer and controller independently using xUnit, then ran integration tests against an in-memory MongoDB instance using Mongo2Go to validate real query behavior without requiring a live connection.
-- Led Jira ticket creation and distribution across the team, creating and assigning over 100 tickets throughout the project.
 
 ## What Octavio did not build
 
@@ -66,8 +72,7 @@ Personal trainers and coaching programs are expensive and inaccessible for most 
 
 ## My role
 
-Co-lead on an 8-person Agile team. Responsible for creating and distributing Jira tickets, unblocking teammates, and filling integration gaps between features. Primarily focused on delivering and owning end-to-end RESTful endpoints with full test coverage, while also integrating those endpoints into the frontend via ViewModels, repositories, and the Ktor HTTP client. Also owned the Gemini AI integration — selecting a KMP-compatible SDK wrapper, feeding live database context to the model, and optimizing token usage for production efficiency.
-
+Co-lead on an 8-person Agile team. Responsible for creating and distributing Jira tickets (100+ across the project), unblocking teammates, and filling integration gaps between features. Primarily focused on delivering and owning end-to-end RESTful endpoints with full test coverage, while also integrating those endpoints into the frontend via ViewModels, repositories, and the Ktor HTTP client. Also owned the Gemini AI integration — selecting a KMP-compatible SDK wrapper, gathering live database context via Ktor, and optimizing token usage for production efficiency.
 
 ## Technical approach
 
@@ -86,7 +91,6 @@ Mongo2Go was used for integration testing, spinning up an in-memory MongoDB inst
 - Octavio achieved full unit and integration test coverage of every backend feature he personally built.
 - Octavio created and distributed over 100 Jira tickets across the team.
 - App published to the Apple App Store and available to real users.
-
 
 ## Challenges
 
