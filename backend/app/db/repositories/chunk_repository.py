@@ -1,6 +1,7 @@
 from app.db.supabase_client import get_supabase_client
 from app.models.chunk_models import EmbeddingChunkModel
 from app.core.logging import get_logger
+from app.models.retrieval_models import RetrievalChunk
 
 class ChunkRepository:
 
@@ -90,4 +91,26 @@ class ChunkRepository:
             return None
         except Exception as e:
             self._logger.error(f"Error deleting chunks by document ID: {e}")
+            raise
+    
+    def get_chunks_by_query(self, query_embedding: list[float], match_count: int = 5) -> list[EmbeddingChunkModel]:
+        """Get chunks based on an embedded query
+
+        Args:
+            query_embedding(list[float]): The embedded query
+            match_count(int): The number of chunks to match
+        Returns:
+            list[EmbeddingChunkModel]: The chunks
+        """
+        try:
+            response = self._client.rpc("match_chunks", {
+                "query_embedding": query_embedding,
+                "match_count": match_count
+            }).execute()
+            if not response.data:
+                self._logger.warning(f"No chunks found for query embedding: {query_embedding[:5]}...")
+                return []
+            return [RetrievalChunk(**chunk) for chunk in response.data]
+        except Exception as e:
+            self._logger.error(f"Error getting chunks by query: {e}")
             raise
