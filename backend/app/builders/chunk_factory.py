@@ -1,5 +1,5 @@
-from app.models.chunk_model import ChunkModel
-from app.models.document_model import DocumentModel
+from app.models.chunk_models import ChunkModel
+from app.models.document_models import DocumentModel
 from app.builders.build_metadata import build_metadata
 from langchain_core.documents import Document as LangchainDocument
 
@@ -24,7 +24,9 @@ def _build_chunk_id(header_path: list[str], chunk_index: int, document_id: str) 
     Returns:
         str: The chunk ID
     """
-    return f"{document_id}-{'-'.join(header_path)}-{chunk_index:04d}" # example: projects-airise-challenges-0023
+    headers = ">".join(header_path[1:]) # remove the first element of the header path which is the title
+    headers = headers.replace(" ", "-") # replace spaces with hyphens
+    return f"{document_id}-{headers}-{chunk_index:04d}" # example: projects-airise>challenges-0023
 
 def create_chunk(chunk_index: int, content: str, header_path: list[str], document: DocumentModel) -> ChunkModel:
     """Create a chunk model

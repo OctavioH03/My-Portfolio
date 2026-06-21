@@ -1,5 +1,5 @@
 from pathlib import Path
-from app.models.document_model import DocumentModel
+from app.models.document_models import DocumentModel
 from app.builders.document_factory import create_document
 import yaml
 

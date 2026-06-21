@@ -1,5 +1,5 @@
-from app.models.document_model import DocumentModel, ExperienceDocumentModel, ProjectDocumentModel
-from app.models.chunk_model import ChunkMetaData
+from app.models.document_models import DocumentModel, ExperienceDocumentModel, ProjectDocumentModel
+from app.models.chunk_models import ChunkMetaData
 from app.core.logging import get_logger
 
 logger = get_logger(__name__)

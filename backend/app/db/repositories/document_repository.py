@@ -1,7 +1,6 @@
 from app.db.supabase_client import get_supabase_client
-from app.models.document_model import DocumentModel
+from app.models.document_models import DocumentModel
 from app.core.logging import get_logger
-from uuid import UUID
 
 class DocumentRepository:
     TABLE_NAME = "documents"
@@ -41,11 +40,11 @@ class DocumentRepository:
             self._logger.error(f"Error upserting document: {e}")
             raise
 
-    def get_document_by_id(self, id: UUID) -> DocumentModel:
+    def get_document_by_id(self, id: str) -> DocumentModel:
         """Get a document by its ID
 
         Args:
-            id(UUID): The ID of the document
+            id(str): The ID of the document
         Returns:
             DocumentModel: The document
         """
@@ -90,11 +89,11 @@ class DocumentRepository:
             self._logger.error(f"Error getting documents by section: {e}")
             raise    
 
-    def delete_document_by_id(self, id: UUID) -> None:
+    def delete_document_by_id(self, id: str) -> None:
         """Delete a document by its ID
 
         Args:
-            id(UUID): The ID of the document
+            id(str): The ID of the document
         Returns:
             None
         """

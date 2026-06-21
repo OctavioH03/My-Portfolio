@@ -1,4 +1,4 @@
-from app.models.chunk_model import ChunkModel
+from app.models.chunk_models import ChunkModel
 
 def build_embedding_input(chunk: ChunkModel) -> str:
     """Build the embedding input for a chunk
@@ -8,13 +8,9 @@ def build_embedding_input(chunk: ChunkModel) -> str:
         str: The embedding input
     """
     headers = " > ".join(chunk.header_path)
-    return f"""
-Title: {chunk.metadata.title}
-Section: {chunk.metadata.section}
-Headers: {headers}
-Content:
-{chunk.content}
-""".strip()
+    keywords = ", ".join(chunk.metadata.stack) if chunk.metadata.stack else "None"
+    keywords += ", " + ", ".join(chunk.metadata.skills) if chunk.metadata.skills else "None"
+    return f"{headers}\n\n{keywords}\n\n{chunk.content}".strip()
 
 # Test the build_embedding_input function
 if __name__ == "__main__":

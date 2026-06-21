@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     CHAT_MODEL: str = "gpt-4o"
     EMBEDDING_MODEL: str = "text-embedding-3-small"
     DOCUMENTS_PATH: str = "documents"
+    RETRIEVAL_TOP_K: int = 15
 
 @lru_cache(maxsize=1)
 def get_config() -> Settings:
