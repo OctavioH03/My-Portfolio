@@ -93,14 +93,14 @@ class ChunkRepository:
             self._logger.error(f"Error deleting chunks by document ID: {e}")
             raise
     
-    def get_chunks_by_query(self, query_embedding: list[float], match_count: int = 5) -> list[EmbeddingChunkModel]:
+    def get_chunks_by_query(self, query_embedding: list[float], match_count: int = 5) -> list[RetrievalChunk]:
         """Get chunks based on an embedded query
 
         Args:
             query_embedding(list[float]): The embedded query
             match_count(int): The number of chunks to match
         Returns:
-            list[EmbeddingChunkModel]: The chunks
+            list[RetrievalChunk]: The chunks
         """
         try:
             response = self._client.rpc("match_chunks", {
@@ -110,7 +110,7 @@ class ChunkRepository:
             if not response.data:
                 self._logger.warning(f"No chunks found for query embedding: {query_embedding[:5]}...")
                 return []
-            return [RetrievalChunk(**chunk) for chunk in response.data]
+            return [RetrievalChunk.model_validate(chunk) for chunk in response.data]
         except Exception as e:
             self._logger.error(f"Error getting chunks by query: {e}")
             raise

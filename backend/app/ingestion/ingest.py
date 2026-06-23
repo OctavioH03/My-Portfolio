@@ -13,7 +13,7 @@ def run_ingestion() -> None:
 
     # Ingest the documents and chunks: upserts the documents and chunks into the database
     ingestion_service = IngestionService()
-    ingested_documents_and_chunks = ingestion_service.ingest_chunked_documents(documents_to_chunks)
+    ingestion_service.ingest_chunked_documents(documents_to_chunks)
 
 if __name__ == "__main__":
     run_ingestion()

@@ -39,12 +39,12 @@ def split_markdown_content(markdown_content: str) -> list[LangchainDocument]:
     """
     markdown_header_splitter = MarkdownHeaderTextSplitter(
         headers_to_split_on=HEADERS_TO_SPLIT_ON,
-        strip_headers=False
+        strip_headers=True
     )
     recursive_character_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
         encoding_name=ENCODING_NAME, 
-        chunk_size=300, 
-        chunk_overlap= 50, 
+        chunk_size=150, 
+        chunk_overlap= 15, 
         separators=CHARACTERS_TO_SPLIT_ON
     )
 

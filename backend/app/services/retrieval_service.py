@@ -4,19 +4,24 @@ from app.core.logging import get_logger
 from app.models.retrieval_models import RetrievalResult
 import re
 from app.core.config import Settings
+from app.services.rerank_service import RerankService
 
 class RetrievalService:
     def __init__(self):
         self._embedding_service = EmbeddingService()
+        self._rerank_service = RerankService()
         self._chunks_repository = ChunkRepository()
         self._logger = get_logger(__name__)
 
     def retrieve(self, query: str) -> RetrievalResult:
+        # Rewrite the query to improve the retrieval results
         query = self._rewrite_query(query)
         self._logger.info(f"Rewritten query: {query}")
+
         query_embedding = self._embedding_service.embed_text(query)
+
+        # Retrieve the chunks from the database
         chunks = self._chunks_repository.get_chunks_by_query(query_embedding, Settings().RETRIEVAL_TOP_K)
-        
         self._logger.info(
             "Retrieved %s chunks for query (top similarity: %s)",
             len(chunks),
@@ -24,10 +29,23 @@ class RetrievalService:
         )
         if not chunks:
             self._logger.warning("No chunks found for query: %s", query)
+            return RetrievalResult(
+                query=query,
+                chunks=[],
+                match_count=0
+            )
+
+        # Rerank the chunks to improve the retrieval results
+        reranked_chunks = self._rerank_service.rerank(query, chunks)
+        self._logger.info(
+            "Reranked %s chunks for query (top similarity: %s)",
+            len(reranked_chunks),
+            reranked_chunks[0].similarity if reranked_chunks else 0
+        )
         
         return RetrievalResult(
             query=query,
-            chunks=chunks,
+            chunks=reranked_chunks,
             match_count=len(chunks)
         )
     
@@ -48,7 +66,7 @@ class RetrievalService:
 # Test the retrieval service
 if __name__ == "__main__":
     retrieval_service = RetrievalService()
-    result = retrieval_service.retrieve("What is Octavio's experience as a backend developer?")
+    result = retrieval_service.retrieve("What experience do you have with full-stack development?")
     print(f"Query: {result.query}")
     print("-"*100)
     for chunk in result.chunks:
