@@ -56,10 +56,9 @@ class RerankService:
             # Return the top N chunks based on the reranking results
             top_chunks = []
             for result in response.results:
-                top_chunks.append(chunks[result.index].model_copy(update={"similarity": result.relevance_score}))
-
-            if top_chunks[0].similarity < Settings().MIN_SIMILARITY_SCORE:
-                return []
+                if result.relevance_score < Settings().MIN_RERANKING_SCORE:
+                    continue
+                top_chunks.append(chunks[result.index].model_copy(update={"score": result.relevance_score}))
             return top_chunks
 
         except Exception as e:

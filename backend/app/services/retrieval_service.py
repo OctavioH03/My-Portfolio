@@ -25,7 +25,7 @@ class RetrievalService:
         self._logger.info(
             "Retrieved %s chunks for query (top similarity: %s)",
             len(chunks),
-            chunks[0].similarity if chunks else 0
+            chunks[0].score if chunks else 0
         )
         if not chunks:
             self._logger.warning("No chunks found for query: %s", query)
@@ -40,7 +40,7 @@ class RetrievalService:
         self._logger.info(
             "Reranked %s chunks for query (top similarity: %s)",
             len(reranked_chunks),
-            reranked_chunks[0].similarity if reranked_chunks else 0
+            reranked_chunks[0].score if reranked_chunks else 0
         )
         
         return RetrievalResult(
@@ -71,5 +71,5 @@ if __name__ == "__main__":
     print("-"*100)
     for chunk in result.chunks:
         print(chunk.content)
-        print(f"Similarity: {chunk.similarity}")
+        print(f"Score: {chunk.score}")
         print("-"*100)
