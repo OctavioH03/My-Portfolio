@@ -1,0 +1,42 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: system-ui, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:root {
+    /* Backgrounds */
+    --background: #120D08;
+    --background-deep: #0D0904;
+    --surface: #1A1208;
+    --surface-navy: #0F1C2E;
+    --surface-navy-raised: #1D2E44;
+  
+    /* Text */
+    --text-primary: #EDE0C8;
+    --text-secondary: rgba(237, 224, 200, 0.42);
+    --text-muted: rgba(237, 224, 200, 0.18);
+  
+    /* Accent — Gold */
+    --accent: #C4956A;
+    --accent-soft: #C4A86A;
+    --accent-dim: #8B6A3A;
+  
+    /* Accent — Navy */
+    --accent-navy: #8BA8C4;
+    --accent-navy-dim: #2C4A6A;
+    --border-navy: rgba(139, 168, 196, 0.08);
+}
