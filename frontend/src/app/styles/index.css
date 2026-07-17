@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@300..700&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Colors */
+  --color-bg: #071A35;
+  --color-bg-secondary: #18385F;
+  --color-bg-tertiary: #445D7A;
+
+  --color-text-primary: #FFF9EF;
+  --color-text-secondary: #E8D6B6;
+  --color-text-muted: #445D7A;
+
+  --color-accent: #E8D6B6;
+  --color-accent-dark: #857B67;
+  --color-accent-secondary: #97A2B0;
+  --color-accent-secondary-dark: #4D5D70;
+
+  --color-border-primary: rgba(7, 26, 53, 0.12);
+  --color-border-secondary: rgba(232, 214, 182, 0.12);
+}
+
+@theme {
+  /* Backgrounds */
+  --color-background: var(--color-bg);     
+  --color-background-secondary: var(--color-bg-secondary);
+  --color-background-tertiary: var(--color-bg-tertiary);
+
+  /* Text */
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+
+  /* Accent */
+  --color-accent: var(--color-accent);
+  --color-accent-dark: var(--color-accent-dark);
+  --color-accent-secondary: var(--color-accent-secondary);
+  --color-accent-secondary-dark: var(--color-accent-secondary-dark);
+
+  /* Borders */
+  --color-border-primary: var(--color-border-primary);
+  --color-border-secondary: var(--color-border-secondary);
+
+  /* Fonts */
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Space Grotesk", sans-serif;
+}
+
