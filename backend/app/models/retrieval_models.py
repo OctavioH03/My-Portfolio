@@ -9,7 +9,7 @@ class RetrievalChunk(BaseModel):
     chunk_index: int
     document_id: str
     metadata: ChunkMetaData
-    similarity: float
+    score: float
 
     @field_validator("metadata", mode="before")
     @classmethod

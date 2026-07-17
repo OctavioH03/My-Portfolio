@@ -2,6 +2,7 @@ from app.db.supabase_client import get_supabase_client
 from app.models.chunk_models import EmbeddingChunkModel
 from app.core.logging import get_logger
 from app.models.retrieval_models import RetrievalChunk
+from app.core.config import Settings
 
 class ChunkRepository:
 
@@ -110,7 +111,7 @@ class ChunkRepository:
             if not response.data:
                 self._logger.warning(f"No chunks found for query embedding: {query_embedding[:5]}...")
                 return []
-            return [RetrievalChunk.model_validate(chunk) for chunk in response.data]
+            return [RetrievalChunk.model_validate(chunk) for chunk in response.data if chunk["score"] > Settings().MIN_VECTOR_SIMILARITY_SCORE]
         except Exception as e:
             self._logger.error(f"Error getting chunks by query: {e}")
             raise

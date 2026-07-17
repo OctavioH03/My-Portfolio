@@ -22,7 +22,8 @@ class Settings(BaseSettings):
     DOCUMENTS_PATH: str = "documents"
     RETRIEVAL_TOP_K: int = 15
     RERANKING_TOP_K: int = 5
-    MIN_SIMILARITY_SCORE: float = 0.35
+    MIN_VECTOR_SIMILARITY_SCORE: float = 0.20
+    MIN_RERANKING_SCORE: float = 0.45
 
 @lru_cache(maxsize=1)
 def get_config() -> Settings:
