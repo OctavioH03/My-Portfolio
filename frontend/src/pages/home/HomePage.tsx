@@ -1,16 +1,13 @@
 // HomePage — assembles all section widgets into the full portfolio page layout
 import { Navbar } from "../../widgets/nav/Navbar";
+import { Scene } from "../../scene/Scene";
 
 export const HomePage = () => {
     return (
         <main className="min-h-screen bg-background">
-           {/*Navbar - always visible as you scroll down*/}\
+           {/*Navbar - always visible as you scroll through the scene*/}
            <Navbar />
-           {/*Hero Section - first section visible when page loads*/}
-           {/*About Section - second section visible when you scroll down*/}
-           {/*Projects Section - third section visible when you scroll down*/}
-           {/*Contact Section - fourth section visible when you scroll down*/}
-           {/*Footer - always visible at the bottom of the page*/}
+           <Scene />
         </main>
     )
 };

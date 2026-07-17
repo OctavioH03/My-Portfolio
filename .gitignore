@@ -8,3 +8,7 @@ extra_notes_and_docs
 **/venv
 **/.pytest_cache
 **/__pycache__
+
+# 3D Modeling
+extra_assets
+*.blend*
