@@ -1,14 +1,15 @@
 import { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { RoomLighting } from "./environment/RoomLighting";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Grid } from "@react-three/drei";
 import { Room } from "./environment/Room";
 import * as THREE from 'three';
+import { MonitorMNKMesh } from "./interactive_objects/monitor-about/MonitorMNKMesh";
+import { Camera } from "./Camera";
+import { PostProcessing } from "./effects/PostProcessing";
 
 
 export function Scene() {
-
-    const roomRef = useRef<THREE.Object3D>(null!);
 
     return (
         <div className="w-full h-full pt-16">
@@ -21,7 +22,7 @@ export function Scene() {
                     position: [0, -1, 10],
                 }}
                 gl={{
-                    antialias: true,  
+                    antialias: true,
                     toneMappingExposure: 1.2,
                     alpha: true,
                 }}
@@ -29,20 +30,23 @@ export function Scene() {
                     position: 'absolute',
                     inset: 0,
                 }}
-                onCreated={({ gl, camera }) => {
+                onCreated={({ gl }) => {
                     gl.setPixelRatio(window.devicePixelRatio);
                     gl.setSize(window.innerWidth, window.innerHeight);
-                    camera.lookAt(0, -3, 0);
                 }}
             >
                 <Suspense fallback={null}>
-                    <Room position={new THREE.Vector3(0, -4.5, 0)} />
-                    {/* Interactive objects */}                    
-                    <RoomLighting position={new THREE.Vector3(0, 10, 100)} targetPosition={new THREE.Vector3(0, -3, 0)} />
-                    {/* Post Processing */}
-
                     {/* DEBUGGING /DEV ONLY */}
                     {/* <OrbitControls /> */}
+                    {/* <Grid args={[100, 100]} scale={0.1} rotation={[-Math.PI / 2, 0, 0]} side={THREE.DoubleSide} /> */}
+
+                    <Camera position={new THREE.Vector3(0, -3.65, -0.75)} rotation={new THREE.Vector3(0.1, Math.PI, 0)} />
+                    <Room position={new THREE.Vector3(0, -4.5, 0)} />
+                    {/* Interactive objects */}
+                    <MonitorMNKMesh position={new THREE.Vector3(0, -3.965, 0)} rotation={new THREE.Vector3(0, Math.PI, 0)} />
+                    <RoomLighting directionalLightPosition={new THREE.Vector3(0, 10, 100)} pointLightPosition={new THREE.Vector3(0, -2, 0)} targetPosition={new THREE.Vector3(0, -3, 0)} />
+                    {/* Post Processing */}
+                    <PostProcessing />
                 </Suspense>
             </Canvas>
         </div>
